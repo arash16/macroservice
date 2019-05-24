@@ -1,6 +1,7 @@
 # macroservice
+[![NPM version](https://img.shields.io/npm/v/macroservice.svg)](https://www.npmjs.com/package/macroservice)
 
-> it's a framework for building monolothic but microservice based rest apis.
+> It's a framework for building monolithic but micro-service based rest apis.
 
 ## License
 

@@ -1,8 +1,22 @@
 {
   "name": "macroservice",
-  "version": "1.0.0",
-  "main": "src/App.js",
+  "version": "1.0.1",
+  "description": "It's a framework for building monolithic but micro-service based rest apis.",
+  "author": "Arash Shakery <arash.shakery@gmail.com> (arash16.com)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/arash16/macroservice.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arash16/macroservice/issues"
+  },
+  "homepage": "https://github.com/arash16/macroservice#readme",
+  "keywords": [
+    "microservice",
+    "rest"
+  ],
+  "main": "src/App.js",
   "scripts": {
     "test": "mocha -r chai-setup.js './src/**/*.test.js'",
     "dev": "nodemon src/",
