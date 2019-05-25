@@ -28,19 +28,33 @@ class ServiceError extends Error {
 }
 
 const errors = {
-  unauthenticated: ['Unauthenticated.', 401],
-  unauthorized: ['Unauthorized.', 403],
-  notFound: ['Not Found.', 404],
-  timeout: ['Timeout Error.', 460],
-  badRequest: ['Bad Request.', 405],
-  badResponse: ['Bad Response.', 405],
-  noResponse: ['No Response.', 406],
-  internal: ['Internal Error.', 500],
+  BadRequest: ['BadRequest', 400],
+  NotAuthenticated: ['NotAuthenticated', 401],
+  PaymentError: ['PaymentError', 402],
+  Forbidden: ['Forbidden', 403],
+  NotFound: ['NotFound', 404],
+  MethodNotAllowed: ['MethodNotAllowed', 405],
+  NotAcceptable: ['NotAcceptable', 406],
+  Timeout: ['Timeout', 408],
+  Conflict: ['Conflict', 409],
+  LengthRequired: ['LengthRequired', 411],
+  Unprocessable: ['Unprocessable', 422],
+  TooManyRequests: ['TooManyRequests', 429],
+  GeneralError: ['GeneralError', 500],
+  NotImplemented: ['NotImplemented', 501],
+  BadGateway: ['BadGateway', 502],
+  Unavailable: ['Unavailable', 503],
 };
 
 Object.entries(errors)
   .forEach(([key, [message, code]]) => {
-    ServiceError[key] = (msg = message, cd = code, data) => new ServiceError(msg, cd, data);
+    ServiceError[key] = class SpecificServiceError extends ServiceError {
+      constructor(msg = message, cd = code, data) {
+        super(msg, cd, data);
+      }
+    };
+
+    ServiceError[code] = ServiceError[key];
   });
 
 module.exports = ServiceError;

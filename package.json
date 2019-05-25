@@ -1,6 +1,6 @@
 {
   "name": "macroservice",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "It's a framework for building monolithic but micro-service based rest apis.",
   "author": "Arash Shakery <arash.shakery@gmail.com> (arash16.com)",
   "license": "MIT",

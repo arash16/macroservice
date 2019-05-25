@@ -17,7 +17,7 @@ module.exports = async function withTimeout(callback, timeout, onTimeout) {
         }
       }
 
-      reject(ServiceError.timeout());
+      reject(new ServiceError.Timeout());
     }, timeout);
 
     try {

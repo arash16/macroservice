@@ -92,7 +92,7 @@ describe('MicroService', () => {
     it('should throw not-found errors if method is not defined', () => {
       const ms = new MicroService({});
       return expect(ms.call('sample'))
-        .to.eventually.be.rejectedWith('Not Found');
+        .to.eventually.be.rejectedWith('NotFound');
     });
   });
 });

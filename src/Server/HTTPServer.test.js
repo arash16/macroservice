@@ -32,7 +32,7 @@ describe('HTTPServer', () => {
             test: {
               http: 'GET /test/:id',
               handler() {
-                err = ServiceError.notFound('test not found');
+                err = new ServiceError.NotFound('test not found');
                 throw err;
               },
             },

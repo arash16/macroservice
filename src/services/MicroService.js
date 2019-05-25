@@ -22,7 +22,7 @@ class MicroService extends BaseService {
     const { params, context } = this.parseArgs(...args);
     const action = this.actions[params.action];
     if (!action) {
-      throw ServiceError.notFound();
+      throw new ServiceError.NotFound();
     }
 
     const { handler, tcp } = action;

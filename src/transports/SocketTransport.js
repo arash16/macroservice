@@ -35,7 +35,7 @@ const utils = {
 
         if (readBytes > len) {
           emitter.off('data', handler);
-          reject(ServiceError.badRequest('Excessive data received.'));
+          reject(new ServiceError.BadRequest('Excessive data received.'));
         }
       });
     });
@@ -61,13 +61,13 @@ class SocketTransport {
       }
 
       timer = timeout && setTimeout(
-        () => finishClient(ServiceError.timeout()),
+        () => finishClient(new ServiceError.Timeout()),
         timeout,
       );
 
       client.on('error', finishClient);
       client.connect(address, async () => {
-        client.on('close', () => finishClient(ServiceError.noResponse()));
+        client.on('close', () => finishClient(new ServiceError.GeneralError()));
 
         // start listening for response
         const resBufPromise = utils.readDynamicMessage(client);
@@ -113,7 +113,7 @@ class SocketTransport {
                 return { error };
               }
               return {
-                error: ServiceError.internal(
+                error: new ServiceError.GeneralError(
                   error.message,
                   error.code || error.statusCode || error.status,
                   error.data,

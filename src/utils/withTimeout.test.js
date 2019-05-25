@@ -18,8 +18,8 @@ describe('withTimeout', () => {
     const p2 = withTimeout(() => rejectAfter(50), 20);
 
     return Promise.all([
-      expect(p1).to.eventually.be.rejectedWith('Timeout Error'),
-      expect(p2).to.eventually.be.rejectedWith('Timeout Error'),
+      expect(p1).to.eventually.be.rejectedWith('Timeout'),
+      expect(p2).to.eventually.be.rejectedWith('Timeout'),
     ]);
   });
 

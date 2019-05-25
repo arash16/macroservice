@@ -58,7 +58,7 @@ describe('SocketTransport', () => {
       app => app.service('proxy').call('test', {}, { timeout: 50 }),
     );
 
-    return expect(result).to.eventually.be.rejectedWith('Timeout Error');
+    return expect(result).to.eventually.be.rejectedWith('Timeout');
   });
 
   it('should throw original error thrown inside remote handler', () => {
@@ -84,7 +84,7 @@ describe('SocketTransport', () => {
         services: [
           {
             publish: ADDR,
-            actions: { test() { throw ServiceError.notFound('some'); } },
+            actions: { test() { throw new ServiceError.NotFound('some'); } },
           },
           { name: 'proxy', remote: ADDR },
         ],
@@ -102,7 +102,7 @@ describe('SocketTransport', () => {
         services: [
           {
             publish: ADDR,
-            actions: { test() { throw ServiceError.notFound('some'); } },
+            actions: { test() { throw new ServiceError.NotFound('some'); } },
           },
           { name: 'proxy', remote: ADDR },
         ],

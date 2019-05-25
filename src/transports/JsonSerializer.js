@@ -5,7 +5,7 @@ class JsonSerializer {
     try {
       return Buffer.from(JSON.stringify(val));
     } catch (e) {
-      throw ServiceError.badResponse(e.message);
+      throw new ServiceError.BadRequest(e.message);
     }
   }
 
@@ -13,7 +13,7 @@ class JsonSerializer {
     try {
       return JSON.parse(buf.toString());
     } catch (e) {
-      throw ServiceError.badRequest(e.message);
+      throw new ServiceError.BadRequest(e.message);
     }
   }
 }
