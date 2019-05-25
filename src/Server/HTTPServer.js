@@ -9,6 +9,10 @@ class HTTPServer {
     this.express = express();
     this.express.use(helmet());
     this.express.use(this._buildRouter());
+
+    if (service.configureExpress) {
+      service.configureExpress(this.express);
+    }
   }
 
   _buildRouter() {
