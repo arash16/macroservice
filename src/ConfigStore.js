@@ -52,7 +52,7 @@ class ConfigStore {
   load(obj, prefix = '') {
     for (const [key, value] of Object.entries(obj)) {
       if (typeof value === 'object' && !Array.isArray(value)) {
-        this.load(value, `${key}.`);
+        this.load(value, `${prefix}${key}.`);
         continue;
       }
 

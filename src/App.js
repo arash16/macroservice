@@ -23,6 +23,10 @@ class App {
       // TODO: emergency cache
     ];
 
+    if (options.config) {
+      this.loadConfig(options.config);
+    }
+
     this._servers = [];
     for (const svc of options.services) {
       const {

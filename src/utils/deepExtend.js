@@ -1,9 +1,9 @@
-function deepExtend(target, source) {
-  if (!source || typeof source !== 'object' || Array.isArray(source)) {
-    return source;
-  }
+function isValue(obj) {
+  return !obj || typeof obj !== 'object' || Array.isArray(obj);
+}
 
-  if (!target || typeof target !== 'object' || Array.isArray(target)) {
+function deepExtend(target, source) {
+  if (isValue(source) || isValue(target)) {
     return source;
   }
 
