@@ -1,5 +1,6 @@
 const BaseService = require('./BaseService');
 const ServiceError = require('../ServiceError');
+const deepExtend = require('../utils/deepExtend');
 
 class MicroService extends BaseService {
   constructor(service, app) {
@@ -30,7 +31,8 @@ class MicroService extends BaseService {
       throw new Error('Not allowed!');
     }
 
-    context.result = await handler.call(this, params, context);
+    const paramsClone = context.caller ? params : deepExtend({}, params);
+    context.result = await handler.call(this, paramsClone, context);
     return context.result;
   }
 }
