@@ -1,4 +1,4 @@
-const deepExtend = require('../utils/deepExtend');
+const { extend } = require('../utils/deep');
 
 function validateHook(hook) {
   if (hook === undefined) return false;
@@ -44,7 +44,7 @@ async function callHook(hook, params, context) {
 
   const r = await hook.call(context, params, context);
   if (r && typeof r === 'object') {
-    deepExtend(context, r);
+    extend(context, r);
   }
   return r;
 }

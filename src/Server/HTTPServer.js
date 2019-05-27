@@ -19,7 +19,7 @@ class HTTPServer {
     const { service } = this;
     const router = express.Router();
     Object.values(service.actions)
-      .forEach((def) => {
+      .forEach(def => {
         if (!def.http) return;
         const httpDef = typeof def.http === 'string' ? { path: def.http } : def.http;
         const [, method, path] = /^(\w+)\s+(.*)$/.exec(httpDef.path);

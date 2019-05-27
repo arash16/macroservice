@@ -2,7 +2,7 @@ const withTimeout = require('./withTimeout');
 
 describe('withTimeout', () => {
   function resolveAfter(timer, val) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setTimeout(() => resolve(val), timer);
     });
   }

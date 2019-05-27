@@ -17,6 +17,10 @@
     "no-await-in-loop": "off",
     "no-continue": "off",
     "no-console": "off",
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
     "indent": [
       "error",
       2

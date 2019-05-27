@@ -20,7 +20,7 @@ function httpBodyParser(serviceDef, actionDef) {
     if (context.req && context.res) {
       for (const m of mids) {
         await new Promise((resolve, reject) => {
-          m(context.req, context.res, (err) => {
+          m(context.req, context.res, err => {
             if (err) reject(err);
             else resolve();
           });

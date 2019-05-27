@@ -1,5 +1,5 @@
 function resolveAfter(timeout, val) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => resolve(val), timeout);
   });
 }

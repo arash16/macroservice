@@ -1,4 +1,4 @@
-const deepExtend = require('./utils/deepExtend');
+const { extend } = require('./utils/deep');
 
 class ConfigStore {
   constructor(initial = {}) {
@@ -31,7 +31,7 @@ class ConfigStore {
       if (typeof value !== 'object' || Array.isArray(value)) {
         throw new Error('Cannot set value to whole state.');
       }
-      this._store = deepExtend(this._store, value);
+      this._store = extend(this._store, value);
       return;
     }
 
@@ -46,7 +46,7 @@ class ConfigStore {
     }
 
     const lKey = keys[keys.length - 1];
-    result[lKey] = deepExtend(result[lKey], value);
+    result[lKey] = extend(result[lKey], value);
   }
 
   load(obj, prefix = '') {
