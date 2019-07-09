@@ -49,10 +49,8 @@ async function callHook(hook, params, context) {
   return r;
 }
 
-function actionHooks(serviceDef, actionDef) {
+function actionHooks({ name: action, handler }, { hooks }) {
   // TODO: merge service hooks + action hooks
-  const { name: action, handler } = actionDef;
-  const { hooks } = serviceDef;
   if (!validateHooks(hooks, action)) {
     return handler;
   }

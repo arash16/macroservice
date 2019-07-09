@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 
-function httpBodyParser(serviceDef, actionDef) {
-  const { http, handler, params: paramsDef } = actionDef;
+function httpBodyParser({ http, handler, params: paramsDef }) {
   if (!http || !paramsDef) return handler;
 
   const mids = [];

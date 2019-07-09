@@ -19,7 +19,7 @@ class BaseService {
     for (let i = middlewares.length - 1; i >= 0; i -= 1) {
       const m = middlewares[i];
       if (m[type]) {
-        actionDef.handler = m[type](this, actionDef) || actionDef.handler;
+        actionDef.handler = m[type](actionDef, this) || actionDef.handler;
       }
     }
   }

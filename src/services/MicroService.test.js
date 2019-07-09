@@ -17,7 +17,7 @@ describe('MicroService', () => {
     });
 
     it('should apply middlewares in reverse order', async () => {
-      const fakeMiddleware = () => ({ local: sinon.spy((_, { handler }) => handler) });
+      const fakeMiddleware = () => ({ local: sinon.spy(({ handler }) => handler) });
       const middlewares = Array(8).fill().map(fakeMiddleware);
 
       const app = {
@@ -49,7 +49,7 @@ describe('MicroService', () => {
     it('should call action middlewares then app middlewares in consecutive order', () => {
       const fakeMiddleware = () => {
         const result = {
-          local: (_, { handler }) => {
+          local: ({ handler }) => {
             result.spy = sinon.spy(handler);
             return result.spy;
           },
