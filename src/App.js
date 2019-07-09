@@ -32,7 +32,7 @@ class App {
       const {
         name,
         publish,
-      } = svc;
+      } = typeof svc === 'function' ? svc(this) : svc;
 
       this.registry.register(name, this._buildService(svc));
       this._buildServer(name, publish);
