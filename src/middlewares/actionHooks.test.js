@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+
 const App = require('../App');
 const { withApp } = require('../utils/test-utils');
 

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+
 const withTimeout = require('./withTimeout');
 
 describe('withTimeout', () => {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 class ServiceError extends Error {
   constructor(message, code, data = {}) {
     let stack;

@@ -1,6 +1,7 @@
 const ServiceError = require('../ServiceError');
 
 module.exports = async function withTimeout(callback, timeout, onTimeout) {
+  // eslint-disable-next-line
   return new Promise(async (resolve, reject) => {
     const prom = callback();
 
