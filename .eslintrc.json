@@ -17,6 +17,14 @@
     "no-await-in-loop": "off",
     "no-continue": "off",
     "no-console": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "optionalDependencies": true,
+        "peerDependencies": false
+      }
+    ],
     "arrow-parens": [
       "error",
       "as-needed"
