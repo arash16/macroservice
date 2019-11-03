@@ -21,7 +21,7 @@ class Server {
   }
 
   async start() {
-    if (!this._started && !this._starting) {
+    if (!this._started && !this._starting && !this.stopping) {
       this._starting = true;
       await this._service.starting();
       await this._server.listen(this._address);
