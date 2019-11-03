@@ -21,15 +21,25 @@ class Server {
   }
 
   async start() {
-    await this._service.starting();
-    await this._server.listen(this._address);
-    await this._service.started();
+    if (!this._started && !this._starting) {
+      this._starting = true;
+      await this._service.starting();
+      await this._server.listen(this._address);
+      this._started = true;
+      await this._service.started();
+      this._starting = false;
+    }
   }
 
   async stop() {
-    await this._service.stopping();
-    await this._server.close();
-    await this._service.stopped();
+    if (this._started && !this._stopping) {
+      this._stopping = true;
+      await this._service.stopping();
+      await this._server.close();
+      this._started = false;
+      await this._service.stopped();
+      this._stopping = false;
+    }
   }
 }
 
