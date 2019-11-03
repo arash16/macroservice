@@ -99,6 +99,8 @@ class SocketTransport {
       try { socket.destroy(); } catch (e) { }
     }
 
+    socket.on('error', close);
+
     // timeout reading request (response timeout is applied with middlewares)
     return withTimeout(
       async () => {
