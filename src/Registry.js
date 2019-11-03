@@ -6,6 +6,13 @@ class Registry {
   register(name, service) {
     this._services[name] = service;
     service.name = name;
+    return service;
+  }
+
+  unregister(name) {
+    const result = this._services[name];
+    delete this._services[name];
+    return result;
   }
 
   services() {

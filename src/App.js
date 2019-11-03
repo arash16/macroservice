@@ -1,3 +1,4 @@
+const BaseService = require('./services/BaseService');
 const MicroService = require('./services/MicroService');
 const ServiceProxy = require('./services/ServiceProxy');
 const ConfigStore = require('./ConfigStore');
@@ -28,30 +29,49 @@ class App {
     }
 
     this._servers = [];
-    for (const svc of options.services) {
-      const {
-        name,
-        publish,
-      } = typeof svc === 'function' ? svc(this) : svc;
-
-      this.registry.register(name, this._buildService(svc));
-      this._buildServer(name, publish);
+    for (const svcConfig of options.services) {
+      this.register(svcConfig);
     }
   }
 
-  _buildServer(name, publish) {
+  register(svcConfig) {
+    if (typeof svcConfig === 'function') {
+      svcConfig = svcConfig(this);
+    }
+
+    const { name, publish } = svcConfig;
+    if (this.service(name)) {
+      throw new Error(`Service '${name}' already registered`);
+    }
+
+    const svc = this._buildService(svcConfig);
+    this._buildServer(name, publish, svc);
+    this.registry.register(name, svc);
+  }
+
+  async unregister(svcName) {
+    await this.stop(svcName);
+    this._servers = this._servers.filter(s => s.name !== svcName);
+    return this.registry.unregister(svcName);
+  }
+
+  _buildServer(name, publish, svc) {
     if (!publish) return;
     if (Array.isArray(publish)) {
       for (const p of publish) {
-        this._buildServer(name, p);
+        this._buildServer(name, p, svc);
       }
       return;
     }
 
-    this._servers.push(new Server(this.service(name), publish));
+    this._servers.push(new Server(svc, publish));
   }
 
   _buildService(service) {
+    if (service instanceof BaseService) {
+      return service;
+    }
+
     if (typeof service.remote === 'string') {
       // we have to call from remote service
       // we only use service object to know action methods
@@ -77,8 +97,11 @@ class App {
     return Promise.all(servers.map(s => s.start()));
   }
 
-  stop() {
-    return Promise.all(this._servers.map(server => server.stop()));
+  stop(...args) {
+    const servers = args.length
+      ? this._servers.filter(s => args.indexOf(s.name) >= 0)
+      : this._servers;
+    return Promise.all(servers.map(s => s.stop()));
   }
 }
 
